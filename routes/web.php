@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,19 @@ use App\Http\Controllers\UserController;
 Route::get('/loginform', function () {
     return view('loginform');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/dashboard',[AuthController::class, 'dashboard'])->name('dashboard');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/signup', [AuthController::class, 'register'])->name('signup');
+
+Route::post('/send-otp', [AuthController::class, 'generateOTP']);
+
 
 Route::post('loginform', [UserController::class, 'authenticate'])->name('loginform');
 
